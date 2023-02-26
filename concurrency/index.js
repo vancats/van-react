@@ -31,7 +31,8 @@ function performUnitOfWork(deadline) {
     }
 
     // didTimeout 为 true 则当前帧没有空闲时间
-    if (deadline.didTimeout) {
+    // timeRemaining 返回当前帧剩余的时间
+    if (deadline.timeRemaining() < 1) {
         // 把当前工作推到下一帧执行
         requestIdleCallback(executeWorkLoop)
         return
